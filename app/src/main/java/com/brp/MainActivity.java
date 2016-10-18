@@ -3,13 +3,16 @@ package com.brp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.brp.ImageHelper.GlideImageHelper;
 import com.brp.Model.GettyConfig;
 import com.brp.Retrofit.ApiInterface;
 import com.brp.Retrofit.MarioWithRx;
+import com.brp.Utils.ItemOffsetDecoration;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     Activity mActivity;
+    GlideImageHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mActivity=this;
+        helper=new GlideImageHelper(this);
+        getImages();
 
     }
 
@@ -56,7 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(GettyConfig gettyConfig) {
-
+                        GridLayoutManager layoutManager
+                                = new GridLayoutManager(mActivity, 2);
+                        recyclerView.setLayoutManager(layoutManager);
+                        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(mActivity, 10);
+                        recyclerView.addItemDecoration(itemDecoration);
+                        recyclerView.setAdapter(new CardAdapter(mActivity,R.layout.item,helper,gettyConfig.getImages()));
                     }
                 });
 
