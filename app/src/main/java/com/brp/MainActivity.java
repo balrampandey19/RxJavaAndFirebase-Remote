@@ -63,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-public void getRemoteApiKey()
+        /* Get Remote Api Key using Firebase remote */
+
+
+    public void getRemoteApiKey()
 {
     long cacheExpiration = 3600; // 1 hour in seconds.
     if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
@@ -86,6 +89,14 @@ public void getRemoteApiKey()
                 }
             });
 }
+
+
+
+
+
+
+    /* Get image list */
+
     public void getImages() {
         ApiInterface userService = MarioWithRx.createService(ApiInterface.class, "swz5kztr484wxwvv6mjzd95y");
         Observable<GettyConfig> call = userService.getImage("");
