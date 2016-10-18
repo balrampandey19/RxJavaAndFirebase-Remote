@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>Api_key</key>
+        <value>Your price is $</value>
+    </entry>
+
+</defaultsMap>
+    <!-- END xml_defaults -->

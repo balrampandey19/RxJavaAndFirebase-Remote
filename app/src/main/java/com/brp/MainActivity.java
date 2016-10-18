@@ -2,17 +2,23 @@ package com.brp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.brp.ImageHelper.GlideImageHelper;
 import com.brp.Model.GettyConfig;
 import com.brp.Retrofit.ApiInterface;
 import com.brp.Retrofit.MarioWithRx;
 import com.brp.Utils.ItemOffsetDecoration;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -31,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Activity mActivity;
     GlideImageHelper helper;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private static final String API_KEY = "Api_key";
+    private String TAG="BGP APP";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +47,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mActivity=this;
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettings(configSettings);
+
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+
+        getRemoteApiKey();
         helper=new GlideImageHelper(this);
+
+
         getImages();
 
     }
 
+public void getRemoteApiKey()
+{
+    long cacheExpiration = 3600; // 1 hour in seconds.
+    if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+        cacheExpiration = 0;
+    }
+    mFirebaseRemoteConfig.fetch(cacheExpiration)
+            .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Fetch Succeeded",
+                                Toast.LENGTH_SHORT).show();
 
+                        mFirebaseRemoteConfig.activateFetched();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Fetch Failed",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    Log.e("Api-key update=",mFirebaseRemoteConfig.getString(API_KEY));
+                }
+            });
+}
     public void getImages() {
         ApiInterface userService = MarioWithRx.createService(ApiInterface.class, "swz5kztr484wxwvv6mjzd95y");
         Observable<GettyConfig> call = userService.getImage("");
@@ -52,14 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Observer<GettyConfig>() {
                     @Override
                     public void onCompleted() {
-
+                        Log.e("")
                     }
-
                     @Override
                     public void onError(Throwable e) {
 
                     }
-
                     @Override
                     public void onNext(GettyConfig gettyConfig) {
                         GridLayoutManager layoutManager
@@ -72,4 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+
+
+
 }
