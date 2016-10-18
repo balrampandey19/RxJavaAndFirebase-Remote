@@ -1,6 +1,7 @@
 package com.brp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         item=data.get(position);
         helper.loadImage(item.getDisplaySizes().get(0).getUri(),holder.image,0.5f,R.drawable.placeholder_gray,R.drawable.placeholder_gray);
+holder.click.setTag(position);
+        holder.click.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Integer ii = (Integer) view.getTag();
 
+        Intent intent=new Intent(mActivity,ImagePreview.class);
+        intent.putExtra(ImagePreview.URL,data.get(ii).getDisplaySizes().get(0).getUri());
+        mActivity.startActivity(intent);
+
+    }
+});
 
     }
 

@@ -94,10 +94,11 @@ public void getRemoteApiKey()
                 .subscribe(new Observer<GettyConfig>() {
                     @Override
                     public void onCompleted() {
-                        Log.e("")
+                        Log.e(TAG,"onCompleted");
                     }
                     @Override
                     public void onError(Throwable e) {
+                        Log.e(TAG,"onError",e);
 
                     }
                     @Override
