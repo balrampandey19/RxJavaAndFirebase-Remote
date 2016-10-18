@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "312136510140",
+    "firebase_url": "https://brptest-3963e.firebaseio.com",
+    "project_id": "brptest-3963e",
+    "storage_bucket": "brptest-3963e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312136510140:android:318ef13034a81567",
+        "android_client_info": {
+          "package_name": "com.brp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312136510140-6k4u1irj9t29hqvond7l9eu9qcp5s6t2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brp",
+            "certificate_hash": "318C5342CB6FD3E49D5B845F9FEAC5CE6EFE5ADF"
+          }
+        },
+        {
+          "client_id": "312136510140-ql45553sgjqsqkiml8ct5b17gc0cosk0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzCWZH7ELlmJucMHhwmuOYkjkZfcK9fho"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312136510140-ql45553sgjqsqkiml8ct5b17gc0cosk0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
