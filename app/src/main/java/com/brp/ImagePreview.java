@@ -37,16 +37,15 @@ import butterknife.ButterKnife;
 public class ImagePreview extends AppCompatActivity {
 
     @BindView(R.id.imageViewPreview)
-    ImageView imageViewPreview;
-    GlideImageHelper helper;
+     ImageView imageViewPreview;
+    private GlideImageHelper helper;
     public static String URL = "url";
-    AmazonS3 s3;
-    TransferUtility transferUtility;
-    Bitmap bitmap;
+    private AmazonS3 s3;
+    private TransferUtility transferUtility;
     @BindView(R.id.uplaod)
-    Button uplaod;
-    Activity mActivity;
-    File fileUpload;
+     Button uplaod;
+    private Activity mActivity;
+    private File fileUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +65,6 @@ public class ImagePreview extends AppCompatActivity {
 
                     }
                 });
-        Glide
-                .with(getApplicationContext())
-                .load(url)
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>(100, 100) {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                        bitmap = resource;
-                        imageViewPreview.setImageBitmap(resource); // Possibly runOnUiThread()
-                    }
-                });
-
 
         uplaod.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +72,7 @@ public class ImagePreview extends AppCompatActivity {
                 setFileToUpload();
             }
         });
-//        helper.loadImage(url,imageViewPreview,0.5f,R.drawable.placeholder_gray,R.drawable.placeholder_gray);
+        helper.loadImage(url,imageViewPreview,0.5f,R.drawable.placeholder_gray,R.drawable.placeholder_gray);
 
 
         credentialsProvider();
@@ -94,7 +81,7 @@ public class ImagePreview extends AppCompatActivity {
     }
 
 
-    public void credentialsProvider() {
+    private void credentialsProvider() {
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
                 "us-east-1:5095e217-2e33-4f92-b29e-d1fff761dc24", // Identity Pool ID
@@ -104,19 +91,19 @@ public class ImagePreview extends AppCompatActivity {
         setAmazonS3Client(credentialsProvider);
     }
 
-    public void setAmazonS3Client(CognitoCachingCredentialsProvider credentialsProvider) {
+    private void setAmazonS3Client(CognitoCachingCredentialsProvider credentialsProvider) {
         s3 = new AmazonS3Client(credentialsProvider);
         s3.setRegion(Region.getRegion(Regions.US_EAST_1));
 
     }
 
 
-    public void setTransferUtility() {
+    private void setTransferUtility() {
 
         transferUtility = new TransferUtility(s3, getApplicationContext());
     }
 
-    public void setFileToUpload() {
+    private void setFileToUpload() {
         TransferObserver transferObserver = transferUtility.upload(
                 "redcarpet-test1",     /* The bucket to upload to */
                 "AKIAIUYL55HDNOJZ3AZA",    /* The key for the uploaded object */
@@ -126,7 +113,7 @@ public class ImagePreview extends AppCompatActivity {
         transferObserverListener(transferObserver);
     }
 
-    public void transferObserverListener(TransferObserver transferObserver) {
+    private void transferObserverListener(TransferObserver transferObserver) {
 
         transferObserver.setTransferListener(new TransferListener() {
 
