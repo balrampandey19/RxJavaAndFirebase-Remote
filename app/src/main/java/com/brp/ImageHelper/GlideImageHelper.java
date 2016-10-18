@@ -16,9 +16,7 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.device.yearclass.YearClass;
 
-/**
- * Created by Kabir on 26-Sep-16.
- */
+
 
 public class GlideImageHelper implements ImageHelper {
 

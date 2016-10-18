@@ -2,6 +2,7 @@ package com.brp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.brp.Model.Image;
 import java.util.List;
 
 /**
- * Created by Gamezop on 18/10/16.
+ * Created by Balram on 18/10/16.
  */
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
@@ -48,9 +49,12 @@ holder.click.setTag(position);
     public void onClick(View view) {
         Integer ii = (Integer) view.getTag();
 
-        Intent intent=new Intent(mActivity,ImagePreview.class);
+        Intent intent = new Intent(mActivity, ImagePreview.class);
         intent.putExtra(ImagePreview.URL,data.get(ii).getDisplaySizes().get(0).getUri());
-        mActivity.startActivity(intent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(mActivity, (View)holder.click, "image");
+        mActivity.startActivity(intent, options.toBundle());
+
 
     }
 });

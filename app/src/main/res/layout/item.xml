@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
+                android:transitionName="image"
                 android:focusableInTouchMode="false"
                 android:scaleType="centerCrop"
                 />
@@ -34,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
+                android:transitionName="image"
                 android:focusableInTouchMode="false"
                 android:scaleType="centerCrop"
                 />

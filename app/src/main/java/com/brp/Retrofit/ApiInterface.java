@@ -6,9 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 
-/**
- * Created by Gamezop on 11/06/16.
- */
+
 public interface ApiInterface {
 
 

@@ -4,9 +4,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-/**
- * Created by admin on 11/16/15.
- */
+
 public interface ImageHelper {
 
     void loadImage(@NonNull String path, @NonNull ImageView imageView);
