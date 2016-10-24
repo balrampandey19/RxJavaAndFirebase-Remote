@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private GlideImageHelper helper;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     private static final String API_KEY = "Api_key";
-    private String TAG = "BGP APP";
+    private String TAG = "RxJava Sample";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
