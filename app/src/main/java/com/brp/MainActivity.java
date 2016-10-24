@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getImages() {
         progressBar.setVisibility(View.VISIBLE);
-        ApiInterface userService = MarioWithRx.createService(ApiInterface.class, "swz5kztr484wxwvv6mjzd95y");
+        ApiInterface userService = MarioWithRx.createService(ApiInterface.class, API-KEY);
         Observable<GettyConfig> call = userService.getImage("");
         call.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
