@@ -89,7 +89,42 @@ public class CreateSevice {
 }
 ```
 
+###### And call endpoint in MainActivity
 
+```
+ ApiInterface userService = CreateService.createService(ApiInterface.class, API-KEY);
+        Observable<GettyConfig> call = userService.getImage("");
+        call.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<GettyConfig>() {
+                    @Override
+                    public void onCompleted() {
+                     progressBar.setVisibility(View.GONE);
+
+                        GridLayoutManager layoutManager
+                                = new GridLayoutManager(mActivity, 2);
+                        recyclerView.setLayoutManager(layoutManager);
+                        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(mActivity, 10);
+                        recyclerView.addItemDecoration(itemDecoration);
+                        recyclerView.setAdapter(new CardAdapter(mActivity, R.layout.item, helper, gettyConfig.getImages()));
+                        
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError", e);
+
+                    }
+
+                    @Override
+                    public void onNext(GettyConfig gettyConfig) {
+                       Log.e(TAG, "onCompleted");
+                    }
+                });
+
+```
+              
+             
 
 
 
