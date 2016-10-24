@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getImages() {
         progressBar.setVisibility(View.VISIBLE);
-        ApiInterface userService = MarioWithRx.createService(ApiInterface.class, API-KEY);
+        ApiInterface userService = MarioWithRx.createService(ApiInterface.class, API_KEY);
         Observable<GettyConfig> call = userService.getImage("");
         call.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(GettyConfig gettyConfig) {
                         progressBar.setVisibility(View.GONE);
-
                         GridLayoutManager layoutManager
                                 = new GridLayoutManager(mActivity, 2);
                         recyclerView.setLayoutManager(layoutManager);
